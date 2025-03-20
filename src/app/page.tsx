@@ -1,5 +1,6 @@
 
 import PriceCard from "@/components/Gallery/PriceCard";
+import GalleryCard from "@/components/Gallery/GalleryCard";
 
 export default function Home() {
   const items = [
@@ -19,7 +20,8 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-full flex items-center justify-center p-5 bg-background">
-      <PriceCard value={29} items={items} />
+      {/* <PriceCard value={29} items={items} /> */}
+      <GalleryCard />
     </main>
   );
 }
