@@ -21,14 +21,16 @@ const GalleryCard = (props: GalleryCardProps) => {
     <div ref={cardRef} className="group/card hover:scale-[1.02] transition-transform duration-200 w-96 h-72  rounded-2xl  relative overflow-hidden shadow-card p-[1.5px] ">
 
       <motion.div
-        className="h-96 w-96 absolute group-hover/card:scale-[1.85] transition-transform duration-200 group-hover/opacity-80 opacity-80 blur-2xl z-0
+        className="h-96 w-96 absolute opacity-80 blur-2xl z-0
         bg-[linear-gradient(135deg,_rgb(59,196,242),_rgb(122,105,249),_rgb(242,99,120),_rgb(245,131,63))] [mask-image:radial-gradient(190px,_white,_transparent)]
         "
         style={{
           left: docX - (384 / 2) - posX,
           top: docY - (384 / 2) - posY,
         }}
-
+        initial={{ scale: 1 }}
+        whileHover={{ scale: 1.85 }}
+        transition={{ duration: 0.2, type: "spring" }}
       />
 
 
@@ -37,10 +39,7 @@ const GalleryCard = (props: GalleryCardProps) => {
       </div>
 
     </div>
-
   )
-
-
 }
 
 export default GalleryCard;
