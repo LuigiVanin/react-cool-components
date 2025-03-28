@@ -19,9 +19,11 @@ export default function Home() {
   ]
 
   return (
-    <main className="w-full min-h-full flex items-center justify-center p-5 bg-background">
+    <main className="w-full min-h-full flex gap-5 items-center justify-center p-5 bg-background">
       {/* <PriceCard value={29} items={items} /> */}
       <GalleryCard />
+      <GalleryCard />
+
     </main>
   );
 }
