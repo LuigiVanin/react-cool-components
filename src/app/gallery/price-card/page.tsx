@@ -1,6 +1,6 @@
-import Link from "next/link";
+import PriceCard from "@/components/Gallery/PriceCard";
 
-export default function Home() {
+export default function PriceCardPage() {
   const items = [
     {
       text: 'Real-Time Market Data',
@@ -18,14 +18,10 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-full flex gap-5 items-center justify-center p-5 bg-background">
-      <Link href="/gallery/gallery-card">
-        Gallery Card Component
-      </Link>
-
-      <Link href="/gallery/price-card">
-        Price Card Component
-      </Link>
-      
+      <PriceCard
+        value={29}
+        items={items}
+      />
     </main>
   );
 }

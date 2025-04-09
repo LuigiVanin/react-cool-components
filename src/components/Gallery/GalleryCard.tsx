@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { useMouse } from "react-use";
 import { motion } from "motion/react";
 import { ClassValue } from "clsx";
@@ -14,7 +14,13 @@ type GalleryCardProps = {
   children?: React.ReactNode
 }
 
-const GalleryCard = forwardRef(({ children, wrapperClassName, className }: GalleryCardProps, ref) => {
+type GalleryCardHeaderProps = {
+  children?: React.ReactNode;
+  className?: ClassValue;
+};
+
+
+const GalleryCard: React.FC<GalleryCardProps> = forwardRef(({ children, wrapperClassName, className }, ref) => {
   const cardRef = useRef(null as any);
 
   useImperativeHandle(ref, () => cardRef.current);
@@ -41,7 +47,31 @@ const GalleryCard = forwardRef(({ children, wrapperClassName, className }: Galle
 
     </div>
   )
+});
+
+const GalleryCardHeader = forwardRef<HTMLDivElement, GalleryCardHeaderProps>(({ children, className }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("w-full py-7 flex items-center justify-center bg-calm-300/20 rounded-2xl text-foreground", className)}
+    >
+      {children}
+    </div>
+  )
 })
 
-export default GalleryCard;
+const GalleryCardBody = forwardRef<HTMLDivElement, GalleryCardHeaderProps>(({ children, className }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("flex flex-col gap-2 flex-1 py-3 text-foreground", className)}
+    >
+      {children}
+    </div>
+  )
+});
+
+// Attach Header and Body as static properties
+
+export { GalleryCard, GalleryCardHeader, GalleryCardBody };
 
