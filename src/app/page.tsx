@@ -18,14 +18,20 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-full flex gap-5 items-center justify-center p-5 bg-background">
-      <Link href="/gallery/gallery-card">
-        Gallery Card Component
-      </Link>
 
-      <Link href="/gallery/price-card">
-        Price Card Component
-      </Link>
-      
+      <div className="flex flex-col justify-center items-center gap-4 text-foreground">
+        <Link href="/gallery/gallery-card" className="underline underline-offset-4">
+          Gallery Card Component
+        </Link>
+
+        <Link href="/gallery/price-card" className="underline underline-offset-4">
+          Price Card Component
+        </Link>
+
+        <Link href="/gallery/magnified-dock" className="underline underline-offset-4">
+          Magnified Dock Component
+        </Link>
+      </div>
     </main>
   );
 }

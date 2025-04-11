@@ -11,6 +11,8 @@ const ThemeSwitch = () => {
     setIsMounted(true);
   }, []);
 
+
+
   if (!isMounted) {
     return null;
   }

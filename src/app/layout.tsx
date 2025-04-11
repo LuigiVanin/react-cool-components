@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import Header from "@/components/App/Header";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,14 +32,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} font-sans antialiased`}
       >
-        <div className="wrapper w-full min-h-full h-full flex flex-col pt-[57px] bg-background relative">
-          <Header />
-          {children}
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <div className="wrapper w-full min-h-full h-full flex flex-col pt-[57px] bg-background relative">
+            <Header />
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
