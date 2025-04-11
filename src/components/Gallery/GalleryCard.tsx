@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, PropsWithChildren, RefObject, useImperativeHandle, useRef } from "react";
 import { useMouse } from "react-use";
 import { motion } from "motion/react";
 import { ClassValue } from "clsx";
@@ -11,21 +11,23 @@ import { cn } from "@/lib/cn";
 type GalleryCardProps = {
   wrapperClassName?: ClassValue
   className?: ClassValue
-  children?: React.ReactNode
-}
+} & PropsWithChildren
 
 type GalleryCardHeaderProps = {
-  children?: React.ReactNode;
   className?: ClassValue;
-};
+} & PropsWithChildren;
+
+type GalleryCardBodyProps = {
+  className?: ClassValue;
+} & PropsWithChildren;
 
 
 const GalleryCard: React.FC<GalleryCardProps> = forwardRef(({ children, wrapperClassName, className }, ref) => {
-  const cardRef = useRef(null as any);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => cardRef.current);
 
-  const { docX, docY, posX, posY, elW, elH } = useMouse(cardRef);
+  const { docX, docY, posX, posY, elW, elH } = useMouse(cardRef as RefObject<HTMLDivElement>);
 
   return (
     <div ref={cardRef} className={cn("group/card hover:scale-[1.02] transition-transform duration-300   rounded-2xl  relative overflow-hidden shadow-card p-[1.5px]", wrapperClassName)}>
@@ -58,9 +60,10 @@ const GalleryCardHeader = forwardRef<HTMLDivElement, GalleryCardHeaderProps>(({ 
       {children}
     </div>
   )
-})
+});
 
-const GalleryCardBody = forwardRef<HTMLDivElement, GalleryCardHeaderProps>(({ children, className }, ref) => {
+const GalleryCardBody = forwardRef<HTMLDivElement, GalleryCardBodyProps>(({ children, className }, ref) => {
+
   return (
     <div
       ref={ref}
@@ -70,6 +73,10 @@ const GalleryCardBody = forwardRef<HTMLDivElement, GalleryCardHeaderProps>(({ ch
     </div>
   )
 });
+
+GalleryCard.displayName = "GalleryCard";
+GalleryCardHeader.displayName = "GalleryCardHeader";
+GalleryCardBody.displayName = "GalleryCardBody";
 
 // Attach Header and Body as static properties
 
