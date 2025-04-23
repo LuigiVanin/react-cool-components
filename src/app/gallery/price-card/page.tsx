@@ -20,7 +20,7 @@ export default function PriceCardPage() {
   const value = 29
 
   return (
-    <main className="w-full min-h-full flex gap-5 items-center justify-center p-5 bg-background">
+    <main className="w-full min-h-full flex gap-5 items-center justify-center p-5">
       <PriceCard
         actionSlot={
           <PriceCard.Action className="group/btn">

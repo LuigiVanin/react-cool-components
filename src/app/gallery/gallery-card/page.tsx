@@ -4,7 +4,7 @@ import { TvIcon } from "lucide-react";
 export default function GalleryCardPage() {
 
   return (
-    <main className="w-full min-h-full flex gap-5 items-center justify-center p-5 bg-background">
+    <main className="w-full min-h-full flex gap-5 items-center justify-center p-5">
       <GalleryCard className="flex flex-col items-center justify-start gap-2 w-96 h-72 cursor-pointer">
         <GalleryCardHeader>
           <TvIcon className="w-16 h-16 text-primary" />

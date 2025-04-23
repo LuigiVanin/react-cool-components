@@ -37,16 +37,22 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} font-sans antialiased bg-background`}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <div className="wrapper w-full min-h-full h-full flex flex-col pt-[57px] bg-background relative">
-            <Header />
-            {children}
+          <div
+            className="wrapper w-full min-h-full h-full flex flex-col items-center [background:radial-gradient(120%_120%_at_50%_20%,transparent_45%,#5a24ea_115%)]"
+          >
+            <div className="w-full min-h-full h-full flex flex-col pt-[57px]  relative items-center px-5 py-24 [backdrop-filter:_blur(90px)] ">
+              <Header />
+              {children}
+
+            </div>
+
           </div>
         </ThemeProvider>
       </body>

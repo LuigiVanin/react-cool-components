@@ -14,7 +14,7 @@ export type PriceCardTitleProps = {
   subtitle?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
-export type PriceCardBadgeProps = HTMLAttributes<HTMLDivElement>;
+export type PriceCardBadgeProps = { text?: string, icon?: React.ReactNode } & HTMLAttributes<HTMLDivElement>;
 export type PriceCardDividerProps = HTMLAttributes<HTMLDivElement>;
 export type PriceCardBodyProps = HTMLAttributes<HTMLDivElement>;
 export type PriceCardFeaturesProps = HTMLAttributes<HTMLUListElement>;
@@ -192,7 +192,7 @@ const PriceCardTitle = ({ className, children, title, subtitle, ...props }: Pric
   );
 };
 
-const PriceCardBadge = ({ className, ...props }: PriceCardBadgeProps) => {
+const PriceCardBadge = ({ className, text, icon, ...props }: PriceCardBadgeProps) => {
   return (
     <div
       {...props}
@@ -202,9 +202,14 @@ const PriceCardBadge = ({ className, ...props }: PriceCardBadgeProps) => {
       )}
     >
       <span className="h-6 w-6 bg-green-400 text-white rounded-full flex items-center justify-center">
-        <Star size={13} fill="currentColor" />
+        {
+          !icon
+            ? <Star size={13} fill="currentColor" />
+            : icon
+        }
+
       </span>
-      <p className="uppercase text-sm text-green-500 font-medium">Popular</p>
+      <p className="uppercase text-sm text-green-500 font-medium">{text || "Popular"}</p>
     </div>
   );
 };

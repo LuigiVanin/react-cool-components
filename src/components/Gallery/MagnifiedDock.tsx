@@ -39,15 +39,15 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
       transition: defaultTransition
     },
     "active": {
-      scale: 1.5,
+      scale: 1.6,
       opacity: 1,
-      y: -16,
+      y: -20,
       transition: defaultTransition
 
     },
     "semi-active": {
       opacity: 0.98,
-      scale: 1.2,
+      scale: 1.25,
       y: -8,
       transition: {
         duration: 0.25,
@@ -70,7 +70,7 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
 
   return (
     <div
-      className="flex flex-row h-20 items-center rounded-2xl bg-calm-200/60 backdrop-blur-xl border border-calm-300/80 shadow-sm shadow-calm-300/50 px-2"
+      className="flex flex-row h-20 items-center rounded-2xl dark:bg-calm-200/60 bg-calm-100/60  backdrop-blur-xl border border-calm-300/80 shadow-sm shadow-calm-300/50 px-2"
       onMouseLeave={() => setIndexHovered(-Infinity)}
     >
       {
@@ -86,7 +86,7 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
             <motion.div
               variants={itemVariants}
               animate={callback(index)}
-              className="relative rounded-full h-full aspect-square flex items-center justify-center"
+              className="relative h-full aspect-square flex items-center justify-center"
             >
               <div className="content absolute inset-0 flex items-center justify-center">
                 {children?.(item)}
