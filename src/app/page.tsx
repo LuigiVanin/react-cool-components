@@ -21,6 +21,10 @@ export default function Home() {
         <Link href="/gallery/speed-slider" className="underline underline-offset-4">
           Speed Slider Component
         </Link>
+
+        <Link href="/gallery/swipe-action" className="underline underline-offset-4">
+          Swipe Action Component
+        </Link>
       </div>
     </main>
   );
