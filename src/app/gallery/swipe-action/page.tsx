@@ -6,7 +6,7 @@ const SwipeActionPage = () => {
   return (
     <main className="w-full min-h-full flex gap-5 items-center justify-center p-5">
       <SwipeAction
-        className="w-auto"
+        className="w-80"
         leftAction={({ close }) =>
           <div className="flex items-center justify-end w-full h-full overflow-x-hidden relative">
             <button

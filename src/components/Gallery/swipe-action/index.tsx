@@ -95,7 +95,7 @@ const SwipeAction = ({ leftAction, rightAction, className }: SwipeActionProps) =
         </motion.div>
 
         <motion.div
-          className="swipe-action  bg-background/80 dark:bg-calm-100 flex items-start justify-between py-4 px-6 gap-3 cursor-pointer ease-in-out z-30"
+          className="swipe-action  bg-background/80 dark:bg-calm-100 flex items-start justify-start py-4 px-6 gap-3 cursor-pointer ease-in-out z-30 w-full"
           whileDrag={{ cursor: "grabbing !important" }}
           drag="x"
           style={{
