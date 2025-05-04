@@ -1,5 +1,5 @@
 
-import { SpeedSlider } from "@/components/Gallery/SpeedSlider"
+import { SpeedSlider } from "@/components/gallery/speed-slider"
 
 const SpeedSliderPage = () => {
   return (

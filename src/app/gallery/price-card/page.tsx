@@ -1,4 +1,4 @@
-import PriceCard from "@/components/Gallery/PriceCard";
+import PriceCard from "@/components/gallery/price-card";
 import { ArrowUp } from "lucide-react";
 
 export default function PriceCardPage() {

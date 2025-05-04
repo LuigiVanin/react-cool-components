@@ -1,5 +1,5 @@
 "use client"
-import SwipeAction from "@/components/Gallery/swipe-action"
+import SwipeAction from "@/components/gallery/swipe-action"
 import { EditIcon, LoaderCircleIcon, Trash2Icon, TvIcon } from "lucide-react"
 import { useState } from "react"
 

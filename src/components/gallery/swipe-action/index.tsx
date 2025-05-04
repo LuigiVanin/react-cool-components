@@ -116,4 +116,8 @@ const SwipeAction = forwardRef<HTMLDivElement, SwipeActionProps>(
 
 SwipeAction.displayName = "SwipeAction";
 
+export {
+  SwipeAction,
+}
+
 export default SwipeAction;

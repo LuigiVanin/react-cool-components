@@ -1,4 +1,4 @@
-import { GalleryCard, GalleryCardBody, GalleryCardHeader } from "@/components/Gallery/GalleryCard";
+import { GalleryCard, GalleryCardBody, GalleryCardHeader } from "@/components/gallery/gallery-card";
 import { TvIcon } from "lucide-react";
 
 export default function GalleryCardPage() {

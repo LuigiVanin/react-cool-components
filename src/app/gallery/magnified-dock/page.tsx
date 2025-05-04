@@ -1,7 +1,6 @@
 "use client"
-
 import { Coffee, Home, Accessibility, Sun, Magnet, Moon, AlarmCheck, PenTool } from "lucide-react"
-import { MagnifiedDock } from "@/components/Gallery/MagnifiedDock";
+import { MagnifiedDock } from "@/components/gallery/magnified-dock";
 
 const MagnifiedDockPage = () => {
   const items = [
