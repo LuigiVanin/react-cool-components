@@ -1,33 +1,23 @@
 "use client"
+import { cn } from "@/lib/cn"
 import { motion, type Variants } from "motion/react"
 import { useCallback, useState } from "react"
-
-type MagnifiedDockItemVariant = 'inactive' | 'semi-active' | 'active'
-
-type CallbackFunction = (index: number) => MagnifiedDockItemVariant
-
+import type { MagnifiedDockItemVariant, MagnifiedDockSizeVariants } from "./types"
+import { containerSizeVariant, slotSizeVariant } from "./variants"
 
 type MagnifiedDockProps<T = unknown> = {
   items: T[]
+  size?: MagnifiedDockSizeVariants
   children?: (item: T) => React.ReactNode
 }
 
-const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
-  // <Coffee className="w-10 h-10 text-calm-100" />,
+const MagnifiedDock = function <T>({
+  items,
+  children,
+  size = "md"
+}: MagnifiedDockProps<T>) {
 
   const [indexHovered, setIndexHovered] = useState(-Infinity)
-
-  const itemWrapperVariants: Variants = {
-    "inactive": {
-      width: "80px",
-    },
-    "active": {
-      width: "100px",
-    },
-    "semi-active": {
-      width: "87px",
-    }
-  }
 
   const defaultTransition = { duration: 0.3, type: "spring", stiffness: 150, mass: 0.75 }
 
@@ -59,9 +49,19 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
     }
   }
 
+  const itemWrapperVariants: Variants = {
+    "inactive": {
+      width: slotSizeVariant[size].inactive.width,
+    },
+    "active": {
+      width: slotSizeVariant[size].active.width,
+    },
+    "semi-active": {
+      width: slotSizeVariant[size]["semi-active"].width,
+    }
+  }
 
-
-  const callback = useCallback<CallbackFunction>((index: number) => {
+  const callback = useCallback((index: number): MagnifiedDockItemVariant => {
     const diff = Math.abs(index - indexHovered)
     if (diff === 0) return 'active'
     if (diff === 1) return 'semi-active'
@@ -70,7 +70,7 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
 
   return (
     <div
-      className="flex flex-row h-20 items-center rounded-2xl dark:bg-calm-200/60 bg-calm-100/60  backdrop-blur-xl border border-calm-300/80 shadow-sm shadow-calm-300/50 px-2"
+      className={cn("flex flex-row items-center rounded-2xl dark:bg-calm-200/60 bg-calm-100/60  backdrop-blur-xl border border-calm-300/80 shadow-sm shadow-calm-300/50", containerSizeVariant[size].class)}
       onMouseLeave={() => setIndexHovered(-Infinity)}
     >
       {
@@ -79,7 +79,7 @@ const MagnifiedDock = function <T>({ items, children }: MagnifiedDockProps<T>) {
             key={index}
             variants={itemWrapperVariants}
             animate={callback(index)}
-            className="slot h-full relative flex items-center justify-center py-2.5 px-2 "
+            className={cn("slot h-full relative flex items-center justify-center", slotSizeVariant[size].class)}
             onMouseEnter={() => setIndexHovered(index)}
             transition={{ duration: 0.2, type: "spring", stiffness: 350, bounce: 0.3, mass: 0.5 }}
           >

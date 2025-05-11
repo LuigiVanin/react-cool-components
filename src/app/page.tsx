@@ -25,6 +25,11 @@ export default function Home() {
         <Link href="/gallery/swipe-action" className="underline underline-offset-4">
           Swipe Action Component
         </Link>
+
+        <Link href="/gallery/multi-step-tabs" className="underline underline-offset-4">
+          Multi Step Tabs Components
+        </Link>
+
       </div>
     </main>
   );

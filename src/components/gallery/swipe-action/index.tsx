@@ -68,7 +68,7 @@ const SwipeAction = forwardRef<HTMLDivElement, SwipeActionProps>(
         className={cn("swipe-action__container group overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow duration-200 rounded-lg border border-calm-200 flex-center bg-background dark:bg-calm-100", className)}
       >
         <motion.div
-          className="swipe-action--left h-full flex items-start justify-between ease-in-out absolute left-0 z-10 rounded-l-lg "
+          className="swipe-action--left h-full flex items-start justify-between ease-in-out absolute left-0 z-10 rounded-l-lg"
           style={{
             width: Math.max(xState, 0)
           }}>
@@ -102,7 +102,7 @@ const SwipeAction = forwardRef<HTMLDivElement, SwipeActionProps>(
             x,
           }}
           dragMomentum={false}
-          dragElastic={0.15}
+          dragElastic={0.1}
           dragConstraints={dragConstraints}
           onDragEnd={handleDragEnd} // Handle snapping on drag end
           onClick={closeDraggableItem} // Handle click to reset
