@@ -23,31 +23,30 @@ const MultiStepTab = () => {
               className={cn(`h-11 w-11 cursor-pointer rounded-full border border-calm-100 bg-calm-200/50 font-semibold text-calm-600 hover:text-calm-900 transition-all duration-200 flex-center relative`, currentTab > tab.index && 'bg-calm-300')}
               onClick={() => setCurrentTab(tab.index)}
             >
-              <AnimatePresence >
-                {
-                  currentTab > tab.index && (
-                    <motion.span
-                      className="absolute inset-0 rounded-full flex-center"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      <CheckIcon size={20} />
-                    </motion.span>
-                  )
-                }
-              </AnimatePresence>
-              <AnimatePresence  >
-                {
-                  currentTab <= tab.index && (
-                    <motion.span
-                      className="absolute inset-0 rounded-full flex-center"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      {tab.text}
-                    </motion.span>
-                  )
-                }
+              <AnimatePresence mode="wait">
+                {currentTab > tab.index ? (
+                  <motion.span
+                    key="check"
+                    className="flex-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <CheckIcon size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="text"
+                    className="flex-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {tab.text}
+                  </motion.span>
+                )}
               </AnimatePresence>
 
             </button>
