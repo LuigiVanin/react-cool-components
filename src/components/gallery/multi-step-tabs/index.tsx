@@ -2,7 +2,7 @@
 import { cn } from "@/lib/cn";
 import { CheckIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 
 type MultyStepTabProps = {
@@ -20,11 +20,23 @@ const MultiStepTab: React.FC<MultyStepTabProps> = ({ className, tabs, currentTab
     return tabs;
   }, [tabs])
 
+
+
   const currentTabIndex = useMemo(() => {
     if (currentTab < 0) return 0;
     if (currentTab > tabsContent.length - 1) return tabsContent.length - 1;
+
     return currentTab;
   }, [currentTab, tabsContent.length]);
+
+  const [tabIndexCache, setTabIndexCache] = useState<number[]>([currentTabIndex]);
+  const dTabIndex = useMemo(() => tabIndexCache[1] - tabIndexCache[0], [tabIndexCache]);
+
+  useEffect(() => {
+    const tabCacheLast = tabIndexCache[tabIndexCache.length - 1];
+    setTabIndexCache([tabCacheLast, currentTabIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTabIndex]);
 
   const currentProgressOffset = useMemo(
     () => `${100 / (tabsContent.length * 2)}%`,
@@ -35,6 +47,7 @@ const MultiStepTab: React.FC<MultyStepTabProps> = ({ className, tabs, currentTab
     () => `${100 * ((currentTabIndex) / tabsContent.length)}%`,
     [currentTabIndex, tabsContent.length]
   );
+
 
   return (
     <div className={cn("flex flex-col w-full min-h-48 items-center justify-start bg-calm-100 rounded-xl border border-calm-200/65 shadow-xs dark:shadow-calm-400/25", className)}>
@@ -99,15 +112,14 @@ const MultiStepTab: React.FC<MultyStepTabProps> = ({ className, tabs, currentTab
               <motion.div
                 key={index}
                 className={cn(`w-full h-auto flex-start text-calm-900 font-semibold text-xl`)}
-                initial={{ opacity: 0, x: "60%" }}
+                initial={{ opacity: 0, x: dTabIndex > 0 ? "60%" : "-50%" }}
+                exit={{ opacity: 0, x: dTabIndex > 0 ? "-60%" : "50%" }}
                 animate={{ opacity: 1, x: "0%" }}
-                exit={{ opacity: 0, x: "-50%" }}
                 transition={{ duration: 0.25 }}
               >
                 <motion.div
                   className="h-auto w-full"
                   ref={(el) => {
-                    console.log(el?.offsetHeight)
                     if (el?.offsetHeight !== undefined) {
                       setContentHeight(el?.offsetHeight || 0);
                       contentRefs.current[index] = el;

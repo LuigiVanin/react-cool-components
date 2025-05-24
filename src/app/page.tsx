@@ -30,6 +30,10 @@ export default function Home() {
           Multi Step Tabs Components
         </Link>
 
+        <Link href="/gallery/skeleton" className="underline underline-offset-4">
+          Skeleton Components
+        </Link>
+
       </div>
     </main>
   );
