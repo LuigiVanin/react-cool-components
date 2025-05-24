@@ -2,39 +2,61 @@
 import { cn } from "@/lib/cn";
 import { CheckIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 
-const MultiStepTab = () => {
-  const [currentTab, setCurrentTab] = useState(0);
 
-  const tabs = useMemo(() => {
-    return Array.from({ length: 3 }, (_, index) => ({ text: String(index + 1), index }));
-  }, [])
+type MultyStepTabProps = {
+  tabs: React.ReactNode[];
+  currentTab: number;
+  className?: string;
+  onStepClick?: (index: number) => void;
+}
 
-  const tabsContent = useMemo(() => {
-    return Array.from({ length: 3 }, (_, index) => ({ text: `Content ${index + 1}`, index }));
-  }, [])
-
+const MultiStepTab: React.FC<MultyStepTabProps> = ({ className, tabs, currentTab, onStepClick }) => {
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const [contentHeight, setContentHeight] = useState<number>(0);
 
+  const tabsContent = useMemo(() => {
+    return tabs;
+  }, [tabs])
+
+  const currentTabIndex = useMemo(() => {
+    if (currentTab < 0) return 0;
+    if (currentTab > tabsContent.length - 1) return tabsContent.length - 1;
+    return currentTab;
+  }, [currentTab, tabsContent.length]);
+
+  const currentProgressOffset = useMemo(
+    () => `${100 / (tabsContent.length * 2)}%`,
+    [tabsContent.length]
+  );
+
+  const currentProgressWidth = useMemo(
+    () => `${100 * ((currentTabIndex) / tabsContent.length)}%`,
+    [currentTabIndex, tabsContent.length]
+  );
+
   return (
-    <div className="flex flex-col w-96 min-h-48 items-center justify-start bg-calm-100 rounded-xl border border-calm-200/65 shadow-xs dark:shadow-calm-400/25">
-      <header className="w-full px-3 py-2 gap-4 flex items-center justify-around bg-calm-200/50 rounded-t-xl">
+    <div className={cn("flex flex-col w-full min-h-48 items-center justify-start bg-calm-100 rounded-xl border border-calm-200/65 shadow-xs dark:shadow-calm-400/25", className)}>
+      <header className="w-full px-3 py-2 gap-4 flex items-center justify-around bg-calm-200/50 rounded-t-xl relative">
+        <motion.span
+          className="line absolute dark:bg-white bg-black h-[2px] rounded-full"
+          animate={{ width: currentProgressWidth, left: currentProgressOffset }}
+          transition={{ duration: 0.3, type: "spring", stiffness: 120 }}
+        />
         {
-          tabs.map((tab) => (
+          tabsContent.map((_, index) => (
             <motion.button
-              key={tab.index}
+              key={index}
               className={cn(
                 `h-11 w-11 cursor-pointer rounded-full border border-calm-100 bg-calm-200/50 font-semibold text-calm-600 hover:text-calm-900 transition-all duration-200 flex-center relative`,
-                currentTab > tab.index && 'bg-calm-300',
-                currentTab === tab.index && 'border-2 border-calm-700 bg-calm-200',
+                currentTabIndex > index && 'bg-calm-300',
+                currentTabIndex === index && 'border-2 border-calm-700 bg-calm-200',
               )}
-              onClick={() => setCurrentTab(tab.index)}
+              onClick={() => onStepClick && onStepClick(index)}
             >
               <AnimatePresence mode="wait">
-                {currentTab > tab.index ? (
+                {currentTabIndex > index || currentTab >= tabsContent.length ? (
                   <motion.span
                     key="check"
                     className="flex-center"
@@ -54,7 +76,7 @@ const MultiStepTab = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {tab.text}
+                    {index + 1}
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -72,10 +94,10 @@ const MultiStepTab = () => {
       >
         <AnimatePresence mode="wait">
           {tabsContent.map((tab, index) =>
-            index === currentTab &&
+            index === currentTabIndex &&
             (
               <motion.div
-                key={tab.index}
+                key={index}
                 className={cn(`w-full h-auto flex-start text-calm-900 font-semibold text-xl`)}
                 initial={{ opacity: 0, x: "60%" }}
                 animate={{ opacity: 1, x: "0%" }}
@@ -85,22 +107,14 @@ const MultiStepTab = () => {
                 <motion.div
                   className="h-auto w-full"
                   ref={(el) => {
-                    if (el?.offsetHeight !== contentHeight)
+                    console.log(el?.offsetHeight)
+                    if (el?.offsetHeight !== undefined) {
                       setContentHeight(el?.offsetHeight || 0);
-                    contentRefs.current[index] = el;
+                      contentRefs.current[index] = el;
+                    }
                   }}
                 >
-                  <motion.div
-                    className={cn(
-                      "p-4",
-                      currentTab === 0 && 'h-40',
-                      currentTab === 1 && 'h-64',
-                      currentTab === 2 && 'h-96'
-                    )}
-
-                  >
-                    {tab.text}
-                  </motion.div>
+                  {tab}
                 </motion.div>
               </motion.div>
             ))}
