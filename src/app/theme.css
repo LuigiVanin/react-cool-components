@@ -1,0 +1,26 @@
+:root {
+  /* Primary/purple */
+  --brand-100: #f4f0fa;
+  --brand-200: #e7dcf7;
+  --brand-300: #c7b2e5;
+  --brand-400: #a886d9;
+  --brand-500: #634096;
+  --brand-600: #41167f;
+  --brand-700: #37136c;
+  --brand-800: #2e105a;
+  --brand-900: #250d48;
+  --brand-950: #1d0a39;
+}
+
+.dark {
+  --brand-100: #1d0a39;
+  --brand-200: #2e105a;
+  --brand-300: #41167f;
+  --brand-400: #634096;
+  --brand-500: #a886d9;
+  --brand-600: #c7b2e5;
+  --brand-700: #c7b2e5;
+  --brand-800: #e7dcf7;
+  --brand-900: #e7dcf7;
+  --brand-950: #f4f0fa;
+}
