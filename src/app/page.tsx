@@ -34,6 +34,10 @@ export default function Home() {
           Skeleton Components
         </Link>
 
+        <Link href="/gallery/multi-value-input" className="underline underline-offset-4">
+          Multi Value Input Components
+        </Link>
+
       </div>
     </main>
   );
