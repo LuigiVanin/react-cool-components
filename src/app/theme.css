@@ -10,6 +10,50 @@
   --brand-800: #2e105a;
   --brand-900: #250d48;
   --brand-950: #1d0a39;
+
+  --success-100: #ecf6f0;
+  --success-200: #c2e9d2;
+  --success-300: #92d7ae;
+  --success-400: #60c488;
+  --success-500: #30b364;
+  --success-600: #02a242;
+  --success-700: #028a38;
+  --success-800: #01732f;
+  --success-900: #015c26;
+  --success-950: #013315;
+
+  --danger-100: #fef1f2;
+  --danger-200: #fdcacd;
+  --danger-300: #fba0a5;
+  --danger-400: #f9747b;
+  --danger-500: #f74a53;
+  --danger-600: #f5222d;
+  --danger-700: #d01d26;
+  --danger-800: #ae1820;
+  --danger-900: #8c131a;
+  --danger-950: #4d1e1e;
+
+  --info-100: #eaeefd;
+  --info-200: #cdd6fa;
+  --info-300: #a6b5f6;
+  --info-400: #7c93f2;
+  --info-500: #5473ef;
+  --info-600: #2f54eb;
+  --info-700: #2847c8;
+  --info-800: #213ca7;
+  --info-900: #1b3086;
+  --info-950: #15266a;
+
+  --warning-100: #fcf5ed;
+  --warning-200: #fee3c7;
+  --warning-300: #fdce9b;
+  --warning-400: #fcb76c;
+  --warning-500: #fba140;
+  --warning-600: #fa8c16;
+  --warning-700: #d57713;
+  --warning-800: #b26310;
+  --warning-900: #8f500d;
+  --warning-950: #402406;
 }
 
 .dark {
@@ -23,4 +67,48 @@
   --brand-800: #e7dcf7;
   --brand-900: #e7dcf7;
   --brand-950: #f4f0fa;
+
+  --success-100: #013315;
+  --success-200: #015c26;
+  --success-300: #01732f;
+  --success-400: #028a38;
+  --success-500: #02a242;
+  --success-600: #30b364;
+  --success-700: #60c488;
+  --success-800: #92d7ae;
+  --success-900: #c2e9d2;
+  --success-950: #ecf6f0;
+
+  --danger-100: #4d1e1e;
+  --danger-200: #8c131a;
+  --danger-300: #ae1820;
+  --danger-400: #d01d26;
+  --danger-500: #f5222d;
+  --danger-600: #f74a53;
+  --danger-700: #f9747b;
+  --danger-800: #fba0a5;
+  --danger-900: #fdcacd;
+  --danger-950: #fef1f2;
+
+  --info-100: #15266a;
+  --info-200: #1b3086;
+  --info-300: #213ca7;
+  --info-400: #2847c8;
+  --info-500: #2f54eb;
+  --info-600: #5473ef;
+  --info-700: #7c93f2;
+  --info-800: #a6b5f6;
+  --info-900: #cdd6fa;
+  --info-950: #eaeefd;
+
+  --warning-100: #402406;
+  --warning-200: #8f500d;
+  --warning-300: #b26310;
+  --warning-400: #d57713;
+  --warning-500: #fa8c16;
+  --warning-600: #fba140;
+  --warning-700: #fcb76c;
+  --warning-800: #fdce9b;
+  --warning-900: #fee3c7;
+  --warning-950: #fcf5ed;
 }
