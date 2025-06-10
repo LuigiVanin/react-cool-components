@@ -20,6 +20,7 @@ type MultiValueInputCustomProps<T> = {
   maxLength?: number;
   className?: string;
   wrapperClassName?: string;
+  keyBreakpoint?: string;
   error?: boolean;
   errorMessage?: string;
   children?: (value: Value<T>, index: number, deleteTag?: (() => void)) => ReactNode;
@@ -32,7 +33,7 @@ type MultiValueInputProps<T> = MultiValueInputCustomProps<T> &
   Omit<InputHTMLAttributes<HTMLInputElement>, keyof MultiValueInputCustomProps<T> | MotionInputConflictProps>;
 
 const MultiValueInputWithRef = <T,>(
-  { onChange, value, name, label, prefix, suffix, children, maxLength, className, wrapperClassName, error = false, errorMessage, ...attr }: MultiValueInputProps<T>,
+  { onChange, value, name, label, prefix, suffix, children, maxLength, className, wrapperClassName, keyBreakpoint = "Enter", error = false, errorMessage, ...attr }: MultiValueInputProps<T>,
   ref: React.ForwardedRef<HTMLInputElement | null>
 ) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -72,7 +73,7 @@ const MultiValueInputWithRef = <T,>(
       }
     } else setBackspaceCount(0);
 
-    if (e.key === 'Enter' && !isDuplicateInputValue && !!currentInput?.value) {
+    if (e.key === keyBreakpoint && !isDuplicateInputValue && !!currentInput?.value) {
       const temp = value.map(v => ({ ...v, value: v.value.trim() }))
       onChange?.([...temp, { value: '' }]);
     }
