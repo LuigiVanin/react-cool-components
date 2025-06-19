@@ -33,8 +33,6 @@ const MultiValueInputPage = () => {
   };
 
   const handleSave = (value: string, index: number) => {
-    console.log(value, index);
-
     if (value4.some(v => v.value === value)) return;
 
     const temp = [...value4];
