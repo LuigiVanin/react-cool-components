@@ -38,6 +38,9 @@ export default function Home() {
           Multi Value Input Components
         </Link>
 
+        <Link href="/gallery/light-effect" className="underline underline-offset-4">
+          Light Effect Components
+        </Link>
       </div>
     </main>
   );

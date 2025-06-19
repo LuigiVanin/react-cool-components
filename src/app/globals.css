@@ -144,6 +144,17 @@ body {
 
   --shadow-card: var(--shadow-card);
   --shadow-card-2: var(--shadow-card-2);
+
+  --animate-aurora: aurora 60s linear infinite;
+
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
+  }
 }
 
 * {
@@ -156,5 +167,14 @@ body {
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }
