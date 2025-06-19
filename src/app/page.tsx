@@ -41,6 +41,11 @@ export default function Home() {
         <Link href="/gallery/light-effect" className="underline underline-offset-4">
           Light Effect Components
         </Link>
+
+        <Link href="/gallery/text-split" className="underline underline-offset-4">
+          Text Split Components
+        </Link>
+
       </div>
     </main>
   );

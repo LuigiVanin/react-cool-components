@@ -146,6 +146,7 @@ body {
   --shadow-card-2: var(--shadow-card-2);
 
   --animate-aurora: aurora 60s linear infinite;
+  --animate-blink: blink 1s linear infinite;
 
   @keyframes aurora {
     from {
@@ -153,6 +154,27 @@ body {
     }
     to {
       background-position: 350% 50%, 350% 50%;
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0;
+    }
+    85% {
+      opacity: 0;
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }
