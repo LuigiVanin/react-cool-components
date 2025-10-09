@@ -1,17 +1,47 @@
-"use client";
-import { cn } from "@/lib/cn";
-import { Loader, Maximize2, Rocket } from "lucide-react";
+import React, { PropsWithChildren, JSX, ButtonHTMLAttributes, ReactNode } from "react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
+import { cn } from "@/lib/cn";
 
-import { useState } from "react";
+type ButtonProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  | "onDrag"
+  | "onDragStart"
+  | "onDragEnd"
+  | "onAnimationStart"
+  | "onAnimationEnd"
+  | "content"
+>;
 
-type DialogProps = {
-  children: React.ReactNode;
+type ActionButton = ButtonProps & {
+  content: JSX.Element | string;
 };
 
-export const DialogBottom = ({ children }: DialogProps) => {
-  const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false);
+type DialogProps = PropsWithChildren<{
+  show: boolean;
+  setShow: (value: boolean) => void;
+  trigger?: ReactNode;
+  className?: string;
+  actions: {
+    primary: ActionButton;
+    secondary?: ActionButton;
+  };
+}>;
+
+export const DialogBottom = ({
+  children,
+  show,
+  setShow,
+  trigger,
+  className,
+  actions: { primary, secondary },
+}: DialogProps) => {
+  const { content: primaryContent, className: primaryClassName, ...primaryProps } = primary;
+  const secondaryProps = secondary
+    ? (() => {
+      const { content: secondaryContent, className: secondaryClassName, ...rest } = secondary;
+      return { content: secondaryContent, className: secondaryClassName, props: rest };
+    })()
+    : null;
 
   const modalVariant: Variants = {
     show: {
@@ -26,17 +56,14 @@ export const DialogBottom = ({ children }: DialogProps) => {
     },
   };
 
+
   return (
     <>
-      <motion.div className="">
-        <motion.button
-          className="bg-brand-500 dark:bg-brand-400 w-80 shadow-sm cursor-pointer text-white px-3 py-2 rounded-md flex flex-row items-center justify-center gap-3 transition-opacity duration-150 opacity-100 hover:opacity-80 "
-          layoutId="action-button"
-          onClick={() => setShow(!show)}
-        >
-          <Maximize2 size={18} />
-          <span>Open Here</span>
-        </motion.button>
+      <motion.div
+        className={className}
+        layoutId="action-button"
+      >
+        {trigger}
       </motion.div>
 
       <motion.div
@@ -66,40 +93,28 @@ export const DialogBottom = ({ children }: DialogProps) => {
             >
               {children}
               <motion.div className="flex gap-4 w-full mt-auto">
-                <motion.button
-                  className="bg-calm-100 dark:bg-transparent flex-1 border border-brand-500 shadow-sm cursor-pointer text-brand-600 px-3 py-2 rounded-md transition-bg duration-150 dark:hover:bg-brand-100/40 hover:bg-brand-100"
-                  onClick={() => setShow(false)}
-                >
-                  Close
-                </motion.button>
+                {secondaryProps && (
+                  <motion.button
+                    {...secondaryProps.props}
+                    className={cn(
+                      "bg-calm-100 dark:bg-transparent flex-1 border border-brand-500 shadow-sm cursor-pointer text-brand-600 px-3 py-2 rounded-md transition-bg duration-150 dark:hover:bg-brand-100/40 hover:bg-brand-100",
+                      secondaryProps.className
+                    )}
+                  >
+                    {secondaryProps.content}
+                  </motion.button>
+                )}
 
                 <motion.button
                   key="action-button"
                   layoutId="action-button"
-                  className={
-                    "bg-brand-500 dark:bg-brand-400 flex-1 shadow-sm cursor-pointer text-white px-3 py-2 rounded-md flex flex-row items-center justify-center gap-3 transition-opacity duration-150 opacity-100 hover:opacity-80" +
-                    (loading ? " opacity-60 cursor-wait" : "")
-                  }
-                  disabled={loading}
-                  onClick={() => {
-                    setLoading(true);
-                    setTimeout(() => {
-                      setLoading(false);
-                      setShow(false);
-                    }, 1000);
-                  }}
-                >
-                  {loading ? (
-                    <>
-                      <Loader size={18} className="animate-spin" />
-                      <span>Loading...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Rocket size={18} />
-                      <span>Submit</span>
-                    </>
+                  {...primaryProps}
+                  className={cn(
+                    "bg-brand-500 dark:bg-brand-400 flex-1 shadow-sm cursor-pointer text-white px-3 py-2 rounded-md flex flex-row   items-center justify-center gap-3 transition-opacity duration-150 opacity-100 hover:opacity-80",
+                    primaryClassName
                   )}
+                >
+                  {primaryContent}
                 </motion.button>
               </motion.div>
             </motion.div>
