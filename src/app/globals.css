@@ -147,6 +147,7 @@ body {
 
   --animate-aurora: aurora 60s linear infinite;
   --animate-blink: blink 1s linear infinite;
+  --animate-unchecked: unchecked 800ms linear;
 
   @keyframes aurora {
     from {
@@ -154,6 +155,23 @@ body {
     }
     to {
       background-position: 350% 50%, 350% 50%;
+    }
+  }
+
+  @keyframes unchecked {
+    0% {
+      background-color: var(--color-brand-500);
+    }
+
+    15% {
+      background-color: var(--color-brand-500);
+    }
+
+    70% {
+      background-color: var(--color-red-600);
+    }
+    100% {
+      background-color: transparent;
     }
   }
 

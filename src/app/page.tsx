@@ -77,6 +77,15 @@ export default function Home() {
         >
           Bottom Dialog Component
         </Link>
+
+        <Link
+          href="/gallery/checkbox"
+          className="underline underline-offset-4"
+        >
+          Checkbox Component
+        </Link>
+
+
       </div>
     </main>
   );
