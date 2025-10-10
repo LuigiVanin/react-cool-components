@@ -1,7 +1,5 @@
 "use client"
 import { TextSplit, TypeWriter } from "@/components/gallery/text-split";
-import { cn } from "@/lib/cn";
-import { ReactNode } from "react";
 
 const TextSplitPage = () => {
 
@@ -36,18 +34,8 @@ const TextSplitPage = () => {
           text="Insane boring ass text animation. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Insane boring ass text animation. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           className="text-calm-600/90 text-center"
           breakpoint={" "}
-        >
-          {
-            (rect: DOMRect | null): ReactNode => (
-              <span className={cn("underline", !rect && 'opacity-0')}>
-                <span> End Position = </span>
-                <strong className="font-semibold">
-                  {Math.floor(rect?.left || 0)}
-                </strong>
-              </span>
-            )
-          }
-        </TypeWriter>
+        />
+
 
       </main>
     </div>
